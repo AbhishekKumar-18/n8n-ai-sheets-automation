@@ -1,0 +1,162 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -112,
+        -128
+      ],
+      "id": "029bdb8a-81bd-469e-aea6-a6ab3f586ccd",
+      "name": "When chat message received",
+      "webhookId": "889538af-7094-4cab-94ed-182a8b251ba1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        -128
+      ],
+      "id": "1c25afcf-0938-4c4b-858c-a318e99b08a8",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        128
+      ],
+      "id": "2555b590-655d-4602-93b2-95db3ea7d6aa",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "e78VmA0UARxG17QZ",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        208,
+        160
+      ],
+      "id": "bcade280-7042-4333-9635-cc13f8e417d9",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID_HERE",
+          "mode": "list",
+          "cachedResultName": "YOUR_SHEET_NAME_HERE",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID_HERE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1986454977,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID_HERE/edit#gid=1986454977"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        480,
+        160
+      ],
+      "id": "75d878b1-9b49-40cd-8cd3-2dc02cbe4d7a",
+      "name": "DataSheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "y3w4C8nZ9RNSJL1u",
+          "name": "Google Sheets account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DataSheet": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "bf3d73bc-08d9-4225-a8f5-6c41ea60c9a6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a732859f42bb8f9ade3d730656d0ae02cbaa9b5723057b131c42b18799dcfd18"
+  },
+  "nodeGroups": [],
+  "id": "VEw6130cvfhPRHCH",
+  "tags": []
+}
